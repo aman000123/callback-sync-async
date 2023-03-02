@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call back function</title>
+</head>
+<body>
+    
+
+<h1> students data list</h1>
+
+<ul id="students"></ul>
+
+
+
+
+
+
+<script>
+console.log("hello world")
+
+
+
+//call back function  =====   function ke andar function hota hai 
+
+
+//call back function == sync async bhi ho sakte hai
+
+//online school ke  bacchon ko online enrolled karne ke liye unki list ko fetch karna hota hai
+
+//mano student data server se mil raha
+
+
+const students =[
+
+{name:"aman",subject:"web development"},
+    {name:"atul",subject:"medical"}
+
+]
+
+
+//respons milne ke bad server se
+
+
+
+
+//for each khud ek function hai ek function input me leta bhi hai yahi hai call back
+
+//students.forEach()
+
+
+
+
+////function enrollled studens
+
+//function enrollstudent(student)  jaise hi is function ko call kare set time out call ho jaye
+
+//set time out === aap jo kar rahe hain karte rahe mai iske andar 3 sec bad background me sambhal lunga
+
+
+//set time out isliye use kiya kyunki jab bhi students ko enrolll karenge to server ko ek request bhejte hai to wo req kuch time legi   mana 3 sec time legi request
+
+/*
+function enrollStudent(student){
+    //set time out bhi ek call back function hai jo ek functon leta hai as a input
+
+    setTimeout(function(){
+
+        students.push(student);
+
+        console.log("students enrooled");
+
+    },3000);
+}
+
+
+///get student function
+
+function getStudents(){
+    setTimeout(function(){
+
+        let str ="";
+        students.forEach(function(student){
+            str += `<li> ${student.name} </li>`
+
+        });
+        //sare students string ke andar aa jayenge
+
+        document.getElementById('students').innerHTML = str;
+        console.log("students fetched");
+
+
+
+    },1000);
+
+}
+
+
+//call the function
+
+
+//satendra ko enrolled karke students ki list de do
+
+let newStudent ={name:"satendra",subject:"python"};
+
+enrollStudent(newStudent);
+
+
+getStudents();
+
+*/
+
+
+// output 
+// aman
+// atul
+
+//but satendra kahna gaya 
+
+//enrolled function ko chalne me 3 sec laga aur ye kam background asynchronous hoga 
+
+//get students ka kam 1 sec me pura ho raha
+
+//isliye   3 sec wal hota rahega aur  get student populate kar ke dega list ko
+
+
+
+//fetch to 1 sec me ho raha hai na enrolled ko hone me   3 sec 
+
+//satendra ko enroll hone me 3 sec laga  aur list 1 sec me hi populate ho gai 
+
+
+
+
+//jab yahna pr 3 sec lag rahe the to enrolled students ko call back function de denge
+
+//jaise hi enrooled ho jaye turant callback function ko call kar dena
+
+
+function enrollStudent(student,callback){
+  
+    setTimeout(function(){
+
+        students.push(student);
+
+        console.log("students enrooled");
+        callback();
+
+    },1000);
+}
+
+
+
+
+function getStudents(){
+    setTimeout(function(){
+
+        let str ="";
+        students.forEach(function(student){
+            str += `<li> ${student.name} </li>`
+
+        });
+ 
+
+        document.getElementById('students').innerHTML = str;
+        console.log("students fetched");
+
+
+
+    },3000);
+
+}
+
+
+
+let newStudent ={name:"satendra",subject:"python"};
+
+//ab get students ko bad me run nhi call back ke sath run karte hai
+
+//enrooled student functin call back bhi leta hai
+
+//3 sec me enrolled 1 sec me fetch
+
+//jab tak enrolled nhi tab tak fetc nhihoga
+
+// call back function == enrooled function call back ko intajar karayega call nhi hone dega  
+
+//jab tak enrolled na hoye  pakad kar rekhega
+
+
+
+enrollStudent(newStudent,getStudents);
+
+
+
+
+
+/*aman
+atul
+satendra*/
+
+
+
+
+
+
+</script>
+</body>
+</html>

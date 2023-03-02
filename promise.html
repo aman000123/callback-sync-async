@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise function</title>
+</head>
+<body>
+    
+
+<h1> students data list</h1>
+
+<ul id="students"></ul>
+
+
+
+
+
+
+
+
+<script>
+
+
+    //promise 1-resolve, 2-reject,     3-pending
+
+    //promise ek object hai
+
+
+    //promise ek fuction hai aur o function do function leat hai   1-resolve 2-reject
+
+    console.log("aman")
+
+
+
+   /* function func1() {
+
+        //promise resolve nhi hota to reject hoti hai
+
+
+        //jis time pr execute hogi us time pending hogi promise
+
+        //func1 ko jab bhi run karenge ki to func1 promise karta hai ki promise ko run karunga 
+
+        return new Promise(function (resolve, reject) {
+
+            setTimeout(() => {
+
+                const error = true;
+                if (!error) {
+
+                    console.log("your promise resolved")
+                    resolve();
+                }
+                //agar resolve na o to
+                else {
+
+                    console.log("your promise  not resolved")
+                    reject("sorry not fulfiled");
+                }
+
+            }, 3000);
+
+
+
+
+        })
+    }
+
+
+  //.then === agar call back resolve ho jati hai to
+
+  //.catch ===  agr promise resolve na ho paye
+
+
+
+    func1().then(function(){
+        console.log("thanks for resolving")
+    }).catch(function(error){
+        console.log("very bad"+ error)
+    })
+
+
+  //func1 ne promise kiya tha ki promise ko kuch bhi karunga resolve ya reject
+
+  //resolve ko then ke anadar reject ko catch ke andar
+
+
+*/
+
+
+  //hm promise ko call back function ke substitue use karte hain
+
+
+  
+const students =[
+
+{name:"aman",subject:"web development"},
+    {name:"atul",subject:"medical"}
+
+]
+
+
+//ab enrolled students ek promise return karta 
+
+
+  function enrollStudent(student){
+  
+    return new Promise((resolve, reject) => {
+        setTimeout(function(){
+
+students.push(student);
+
+console.log("students enrooled");
+ 
+const error = false;
+if(!error){
+resolve();
+}
+else{
+    reject();
+}
+
+},5000);
+
+
+        
+    })
+ 
+}
+
+
+
+
+function getStudents(){
+  setTimeout(function(){
+
+      let str ="";
+      students.forEach(function(student){
+          str += `<li> ${student.name} </li>`
+
+      });
+
+
+      document.getElementById('students').innerHTML = str;
+      console.log("students fetched");
+
+
+
+  },1000);
+
+}
+
+
+
+let newStudent ={name:"satendra",subject:"python"};
+
+
+
+
+
+//promise resolve karke get students ko call karde
+
+enrollStudent(newStudent).then(function(){
+    getStudents();
+}).catch(function(){
+    console.log("error ocured")
+});
+
+
+//then function    resolve ke andar ka function
+
+//catch  reject ka function
+
+</script>
+
+</body>
+</html></html>
